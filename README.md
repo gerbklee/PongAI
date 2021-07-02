@@ -1,6 +1,6 @@
 # PongAI
 Credit for Basis of QLearning Framework to: https://github.com/python-engineer/snake-ai-pytorch  
-(I changed Network Architecture and Fitted the logic to Pong. This was a great starting Point.)
+(I changed Network Architecture and Fitted the logic to Pong. This was a great starting Point but has changed quiet a bit.)
 
 Credit for Pong Basis to: https://github.com/clear-code-projects/Pong_in_Pygame  
 (I rewrote the Code so its Object Oriented and added the Rule Based Opponent.) 
