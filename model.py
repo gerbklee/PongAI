@@ -5,15 +5,18 @@ import torch.nn.functional as F
 import os
 
 class Linear_QNet(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, hidden_size, x_size, y_size, output_size):
         super().__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
-        self.linear2 = nn.Linear(hidden_size, output_size)
-        self.softmax = nn.Softmax()
+        self.linear2 = nn.Linear(hidden_size, x_size)
+        self.linear3 = nn.Linear(x_size, y_size)
+        self.linear4 = nn.Linear(y_size, output_size)
     def forward(self, x):
         x = F.relu(self.linear1(x))
         x = self.linear2(x)
-        x = self.softmax(x)
+        x= self.linear3(x)
+        x= self.linear4(x)
+
         return x
 
     def save(self, file_name='model.pth'):
@@ -37,7 +40,8 @@ class QTrainer:
         state = torch.tensor(state, dtype=torch.float)
         next_state = torch.tensor(next_state, dtype=torch.float)
         action = torch.tensor(action, dtype=torch.long)
-        reward = torch.tensor(reward, dtype=torch.float)
+        reward = torch.tensor(reward, dtype=torch.int)
+
         # (n, x)
 
         if len(state.shape) == 1:
