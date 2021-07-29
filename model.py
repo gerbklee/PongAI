@@ -4,6 +4,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 import os
 
+
 class Linear_QNet(nn.Module):
     def __init__(self, input_size, hidden_size, x_size, y_size, output_size):
         super().__init__()
@@ -11,6 +12,8 @@ class Linear_QNet(nn.Module):
         self.linear2 = nn.Linear(hidden_size, x_size)
         self.linear3 = nn.Linear(x_size, y_size)
         self.linear4 = nn.Linear(y_size, output_size)
+
+    #def of forward pass
     def forward(self, x):
         x = F.relu(self.linear1(x))
         x = self.linear2(x)
@@ -19,6 +22,7 @@ class Linear_QNet(nn.Module):
 
         return x
 
+    #for model saving after best iterations
     def save(self, file_name='model.pth'):
         model_folder_path = './model'
         if not os.path.exists(model_folder_path):
@@ -44,6 +48,7 @@ class QTrainer:
 
         # (n, x)
 
+    #gets infos about gamestate
         if len(state.shape) == 1:
             # (1, x)
             state = torch.unsqueeze(state, 0)
@@ -64,8 +69,7 @@ class QTrainer:
             target[idx][torch.argmax(action[idx]).item()] = Q_new
     
         # 2: Q_new = r + y * max(next_predicted Q value) -> only do this if not done
-        # pred.clone()
-        # preds[argmax(action)] = Q_new
+        #init optimization function
         self.optimizer.zero_grad()
         loss = self.criterion(target, pred)
         loss.backward()

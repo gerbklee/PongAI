@@ -171,10 +171,11 @@ class PongGameAI:
         # 	opponent.bottom = screen_height
 
     def _update_ui(self):
-        pygame.draw.rect(self.display, black, self.player)
-        pygame.draw.rect(self.display, black, self.opponent)
-        pygame.draw.ellipse(self.display, black, self.ball)
-        pygame.draw.aaline(self.display, black, (self.screen_width / 2, 0),(self.screen_width / 2, self.screen_height))
+        self.display.fill(black)
+        pygame.draw.rect(self.display, white, self.player)
+        pygame.draw.rect(self.display, white, self.opponent)
+        pygame.draw.ellipse(self.display, white, self.ball)
+        pygame.draw.aaline(self.display, white, (self.screen_width / 2, 0),(self.screen_width / 2, self.screen_height))
         
         
         pygame.display.flip()

@@ -4,10 +4,7 @@ from enum import Enum
 from collections import namedtuple
 import numpy as np
 
-
-
-#font = pygame.font.SysFont('arial', 25)
-
+#Inititate directions
 class Direction(Enum):
     DOWN = 1
     UP = 2
@@ -67,7 +64,7 @@ class PongGameAI:
         self.reset()
 
     def reset(self):
-        # init game state
+        # reset game state after one iteration
         self.direction = Direction.UP
 
 
@@ -83,7 +80,7 @@ class PongGameAI:
 
 
 
-
+    #lets the ball start at the beginning of every round
 
     def ball_start(self):
         global ball_speed_x, ball_speed_y, ball_moving, score_time
@@ -106,9 +103,9 @@ class PongGameAI:
             ball_speed_y, ball_speed_x = 0,0
         else:
             ball_speed_x = 1 * random.randint(0,50)
-            #ball_speed_y = 1 * random.randint(-50,0)
             score_time = None
 
+    #Keeps track of player scores 
     def playerScore(self):
         pygame.mixer.Sound.play(self.score_sound)
         self.score_time = pygame.time.get_ticks()
@@ -125,7 +122,7 @@ class PongGameAI:
 
 
 
-
+    #This is responsible for ball movement
     def ball_animation(self):
         global ball_speed_x, ball_speed_y, player_score, opponent_score, score_time
 
@@ -136,19 +133,19 @@ class PongGameAI:
             pygame.mixer.Sound.play(self.plob_sound)
             self.ball_speed_y *= -1
 
-        # Player Score
+        # Player Score condition
         if self.ball.left <= 0:
             self.playerScore()
             self.ball_start()
 
 
-        # Opponent Score
+        # Opponent Score condition
         if self.ball.right >= self.screen_width:
             self.opponentScore()
             self.ball_start()
 
 
-
+        #Ball collides with player paddle
         if self.ball.colliderect(self.player) and self.ball_speed_x > 0:
             pygame.mixer.Sound.play(self.plob_sound)
             if abs(self.ball.right - self.player.left) < 10:
@@ -160,7 +157,7 @@ class PongGameAI:
             self.reward =  50
             self.rebounds += 1
 
-
+        #Ball collides with opponent paddle
         if self.ball.colliderect(self.opponent) and self.ball_speed_x < 0:
             pygame.mixer.Sound.play(self.plob_sound)
             if abs(self.ball.left - self.opponent.right) < 10:
@@ -187,22 +184,12 @@ class PongGameAI:
             self.reward = -1
 
 
-
-
-
-
     def opponent_ai(self):
-        # if opponent.top < ball.y:
-        # 	opponent.y += opponent_speed
-        # if opponent.bottom > ball.y:
-        # 	opponent.y -= opponent_speed
+        #This makes the Opponent rule based. The Rule is to follow the ball wherever its going. Simple but effective.
 
         self.opponent.y = self.ball.y
-        # if opponent.top <= 0:
-        # 	opponent.top = 0
-        # if opponent.bottom >= screen_height:
-        # 	opponent.bottom = screen_height
 
+    #updates ui every tick
     def _update_ui(self):
 
         self.display.fill(black)
@@ -222,7 +209,7 @@ class PongGameAI:
         pygame.display.update()
 
 
-
+    #this is the game loop
     def play_step(self, action):
         self.frame_iteration += 1
         self.reward = 0
@@ -264,32 +251,8 @@ class PongGameAI:
         # 6. return game over and score
         return game_over, self.rebounds, self.reward
 
-
+    #input for movement
     def _move(self, action):
-        # [straight, right, left]
-
-        # clock_wise = [ Direction.DOWN, Direction.UP, None]
-        # idx = clock_wise.index(self.direction)
-
-        # if np.array_equal(action, [1, 0, 0]):
-        #     new_dir = clock_wise[idx] # no change
-        # elif np.array_equal(action, [0, 1, 0]):
-        #     next_idx = (idx + 1) % 2
-        #     new_dir = clock_wise[next_idx] # right turn r -> d -> l -> u
-        # elif np.array_equal(action, [0, 0, 1]): # [0, 0, 1]
-        #     next_idx = (idx - 1) % 2
-        #     new_dir = clock_wise[next_idx] # left turn r -> u -> l -> d
-
-        # self.direction = new_dir
-
-
-
-        # if self.direction == Direction.DOWN:
-        #     self.player_speed += 6
-        # elif self.direction == Direction.UP:
-        #    self.player_speed -= 6
-        # else:
-        #     self.player_speed = 0
         if action == [1,0,0]:
             self.player_speed = 6
         elif action == [0,1,0]:

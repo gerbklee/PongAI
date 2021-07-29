@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from IPython import display
 
+#this is stuff for plotting the results
 plt.ion()
 
 def plot(scores, mean_scores):
