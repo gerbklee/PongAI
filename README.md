@@ -6,11 +6,11 @@ Credit for Pong Basis to: https://github.com/clear-code-projects/Pong_in_Pygame
 (I rewrote the Code so its Object Oriented and added the Rule Based Opponent. Assets stayed the same.) 
 
 # The Files
-agent.py: Contains Agent. Run to start training
-game.py: Contains Game to be played by agent. Does not run on its own
-game_manual: Game for manual playing. Runs on its own. A little novelty.
-helper.py: Contains code for live plotting of results
-model.py: Contains model. Does not un on its own
+1. agent.py: Contains Agent. Run to start training
+2. game.py: Contains Game to be played by agent. Does not run on its own
+3. game_manual: Game for manual playing. Runs on its own. A little novelty.
+4. helper.py: Contains code for live plotting of results
+5. model.py: Contains model. Does not un on its own
 
 # How to run?
 To play the Pong Game yourself, run "game_manual.py". This is just for fun. The Actual Project is the Reinforcement Learning approach.
