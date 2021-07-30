@@ -25,3 +25,7 @@ The Agent is rewarded for hitting the Ball and returning it to the Opponent. It 
 
 # How do the Iterations Work?
 One Iteration spans five Points to be scored. After that the Game resets, Variables are cleared and a Graph ist plotted. The Graph is intended for User Reference and Performance Review. It shows the Amount of returned Balls per Iteration. Rewards are not shown and may therefore be negative in a seemingly great iteration (Because of the Screen Edges and the opponent scoring)
+
+# How does the Agent learn?
+The Agents learning is based on Gamestates. These contain the Ball's x and y position aswell as the Agent's y position. 
+
