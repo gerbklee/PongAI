@@ -5,6 +5,13 @@ Credit for Basis of QLearning Framework to: https://github.com/python-engineer/s
 Credit for Pong Basis to: https://github.com/clear-code-projects/Pong_in_Pygame  
 (I rewrote the Code so its Object Oriented and added the Rule Based Opponent. Assets stayed the same.) 
 
+# The Files
+agent.py: Contains Agent. Run to start training
+game.py: Contains Game to be played by agent. Does not run on its own
+game_manual: Game for manual playing. Runs on its own. A little novelty.
+helper.py: Contains code for live plotting of results
+model.py: Contains model. Does not un on its own
+
 # How to run?
 To play the Pong Game yourself, run "game_manual.py". This is just for fun. The Actual Project is the Reinforcement Learning approach.
 To se the learning Process run "agent.py".
