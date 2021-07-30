@@ -5,6 +5,8 @@ Credit for Basis of QLearning Framework to: https://github.com/python-engineer/s
 Credit for Pong Basis to: https://github.com/clear-code-projects/Pong_in_Pygame  
 (I rewrote the Code so its Object Oriented and added the Rule Based Opponent. Assets stayed the same.) 
 
+Further information about the Software and the training process is given in the Paper detailing the Portfolio contents.
+
 ![img](https://github.com/gerbklee/PongAI/blob/main/Screenshot%202021-07-30%20115311.png)
 
 # The Files
